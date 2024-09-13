@@ -1,4 +1,4 @@
-import { Product  } from "../components/Product"
+import { Product  } from "../components/product/Product"
 import { products as data } from "../data/products"
 import { useQuiosco } from "../hooks/useQuiosco"
 

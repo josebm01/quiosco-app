@@ -1,9 +1,12 @@
 import React from 'react'
-import { currencyFormat } from '../helpers'
+import { currencyFormat } from '../../helpers'
+import { useQuiosco } from '../../hooks/useQuiosco'
 
 export const Product = ({ product }) => {
 
     const { nombre, imagen, precio } = product
+    
+    const { handleModal, handleSetProduct } = useQuiosco()
 
   return (
     <div className='p-3 bg-white border shadow'>
@@ -24,6 +27,7 @@ export const Product = ({ product }) => {
             <button 
                 type='button'
                 className='w-full p-3 mt-5 font-bold text-white uppercase bg-indigo-600 hover:bg-indigo-800'
+                onClick={ () => { handleModal(), handleSetProduct(producto) } }
             >
                 Agregar
             </button>
