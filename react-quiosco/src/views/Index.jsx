@@ -1,10 +1,12 @@
-import { Product } from "../components/Product"
-import { products } from "../data/products"
+import { Product  } from "../components/Product"
+import { products as data } from "../data/products"
 import { useQuiosco } from "../hooks/useQuiosco"
 
 export const Index = () => {
 
   const { currentCategory } = useQuiosco()
+
+  const products = data.filter( product => product.categoria_id === currentCategory.id )
 
   return (
     <>
