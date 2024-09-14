@@ -5,11 +5,12 @@ const QuioscoContext = createContext()
 
 export const QuioscoProvider = ({ children }) => {
   
-
     const [ categories, setCategories ] = useState(categoriesDB)
     const [ currentCategory, setCurrentCategory ] = useState(categories[0])
     const [ modal, setModal ] = useState(false)
     const [ product, setProduct ] = useState({})
+    const [ order, setOrder ] = useState([])
+
     
     /**
      * Función para cambiar la cambiar las categorías del producto
@@ -45,7 +46,8 @@ export const QuioscoProvider = ({ children }) => {
                 modal,
                 handleModal,
                 product,
-                handleSetProduct
+                handleSetProduct,
+                order
             }}
         >
             { children }
