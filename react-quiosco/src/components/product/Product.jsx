@@ -27,7 +27,7 @@ export const Product = ({ product }) => {
             <button 
                 type='button'
                 className='w-full p-3 mt-5 font-bold text-white uppercase bg-indigo-600 hover:bg-indigo-800'
-                onClick={ () => { handleModal(), handleSetProduct(producto) } }
+                onClick={ () => { handleModal(), handleSetProduct(product) } }
             >
                 Agregar
             </button>
