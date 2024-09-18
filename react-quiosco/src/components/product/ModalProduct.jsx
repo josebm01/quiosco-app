@@ -1,13 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { currencyFormat } from '../../helpers'
 import { useQuiosco } from '../../hooks/useQuiosco'
 
 export const ModalProduct = () => {
 
-    const { product, handleModal } = useQuiosco()
-
+    const { product, handleModal, handleAddOder, order } = useQuiosco()
     const [amount, setAmount] = useState(1)
+    const [ edit, setEdit ] = useState(false)
 
+    useEffect(() => {
+        if ( order.some( orderState => orderState.id === product.id ) ) {
+            const editProduct = order.filter( orderState => orderState.id === product.id )[0]
+            setAmount( editProduct.amount )
+            setEdit( true )
+        }
+    }, [order])
+    
+   
+    
   return (
     <div className='gap-10 md:flex'>
         <div className='md:w-1/3'>
@@ -64,8 +74,14 @@ export const ModalProduct = () => {
             <button
                 type='button'
                 className='px-5 py-2 mt-5 font-bold text-white uppercase bg-indigo-600 rounded hover:bg-indigo-800'
+                onClick={ () => {
+                    handleAddOder({ ...product, amount }) 
+                    handleModal()} 
+                }
             >   
-                Añadir al pedido
+                {
+                    edit ? 'Guardar cambios' : 'Añadir al pedido'
+                }
             </button>
         </div>
     </div>

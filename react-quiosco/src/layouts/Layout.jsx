@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom'
 import { Sidebar } from '../components/Sidebar'
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+import Modal from 'react-modal'
 import { Summary } from '../components/Summary'
 import { useQuiosco } from '../hooks/useQuiosco'
-import Modal from 'react-modal'
 import { ModalProduct } from '../components/product/ModalProduct'
 
 const customStyles = {
@@ -39,6 +41,8 @@ export const Layout = () => {
           </Modal>
         )
       }
+
+      <ToastContainer />
     </>
   )
 }

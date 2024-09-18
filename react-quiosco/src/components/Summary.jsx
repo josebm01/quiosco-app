@@ -1,8 +1,12 @@
+import { currencyFormat } from "../helpers"
 import { useQuiosco } from "../hooks/useQuiosco"
+import { SummaryProduct } from "./SummaryProduct"
 
 export const Summary = () => {
   
-  const { order } = useQuiosco()
+  const { order, total } = useQuiosco()
+
+  const verifyOrder = () => order.length === 0
 
   return (
     <aside className="h-screen p-5 overflow-y-scroll w-72">
@@ -19,13 +23,18 @@ export const Summary = () => {
                 No hay productos en la orden 
               </p>
             ) : (
-              <p>Vacío</p>
+              
+                order.map( product => (
+                  <SummaryProduct key={product.id} product={product} />
+                ))
+              
             )
           }
         </div>
 
         <p className="mt-10 text-xl">
           Total: {''}
+          { currencyFormat( total) }
         </p>
           
         <form action="w-full">
@@ -33,8 +42,12 @@ export const Summary = () => {
             <div className="mt-5">
               <input 
                 type="submit" 
-                className="w-full px-5 py-2 font-bold text-center text-white uppercase bg-indigo-600 rounded cursor-pointer hover:bg-indigo-800"
+                className={`
+                  ${ verifyOrder() ? 'bg-indigo-100' : 'bg-indigo-600' } 
+                  w-full px-5 py-2 font-bold text-center text-white uppercase rounded cursor-pointer hover:bg-indigo-800`
+                }
                 value='Confirmar pedido'
+                disabled={ verifyOrder() }
               />
             </div>
           </div>
