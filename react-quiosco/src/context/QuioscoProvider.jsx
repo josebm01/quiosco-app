@@ -1,13 +1,14 @@
 import { createContext, useEffect, useState } from "react"
+import axios from 'axios'
 import { toast } from 'react-toastify'
-import { categories as categoriesDB } from "../data/categories"
+// import { categories as categoriesDB } from "../data/categories"
 
 const QuioscoContext = createContext()
 
 export const QuioscoProvider = ({ children }) => {
   
-    const [ categories, setCategories ] = useState(categoriesDB)
-    const [ currentCategory, setCurrentCategory ] = useState(categories[0])
+    const [ categories, setCategories ] = useState([])
+    const [ currentCategory, setCurrentCategory ] = useState({})
     const [ modal, setModal ] = useState(false)
     const [ product, setProduct ] = useState({})
     const [ order, setOrder ] = useState([])
@@ -20,6 +21,25 @@ export const QuioscoProvider = ({ children }) => {
         const newTodal = order.reduce( ( total, product ) => ( product.precio * product.amount ) + total, 0 )
         setTotal( newTodal ) 
     }, [ order ])
+
+    
+
+    const getCategories = async () => {
+        try {
+
+            const { data } = await axios('http://localhost:8001/api/categories')
+            setCategories(data.data)
+            setCurrentCategory(data.data[0])
+    
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => {
+        getCategories()
+    }, [])
 
     /**
      * Función para cambiar la cambiar las categorías del producto
