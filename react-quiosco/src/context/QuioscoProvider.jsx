@@ -23,6 +23,9 @@ export const QuioscoProvider = ({ children }) => {
 
     
 
+    /**
+     * Obteniendo categorías de la api
+     */
     const getCategories = async () => {
         try {
 
@@ -68,7 +71,7 @@ export const QuioscoProvider = ({ children }) => {
      * Función para añadir productos a la orden
      * @param {*} param0 
      */
-    const handleAddOder = ({ categoria_id, ...product }) => {
+    const handleAddOder = ({ category_id, ...product }) => {
 
         if ( order.some( orderState => orderState.id === product.id ) ) {
             // actualizar producto existente en la orden
